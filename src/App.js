@@ -1,23 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+// import { Navigation } from './component/navigation';
+import  Login  from './pages/login';
+import {Route, Routes, useNavigate } from 'react-router-dom';
+import {RegistrationForm} from './pages/registrationForm';
+import { useEffect, useState } from 'react';
+import movieList from './component/movieList.js';
+import MovieListHeading from './component/MovieListHeading.js';
+import SearchBox from './component/SearchBox.js';
+import RemoveFavourites from './component/RemoveFavourites.js';
+import MovieList from './component/movieList.js';
+import { Homefilms } from './pages/homeFilms';
+
 
 function App() {
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Navigation/> */}
+      {/* <Login/> */}
+      {/* <RegistrationForm/> */}
+      <Routes>
+          <Route path="/" element={<Login/>}/>
+          <Route path="/signin" element={<RegistrationForm/>}/>
+          <Route path="/movieList" element={<MovieList/>}/>
+          <Route path='/homeFilms' element={<Homefilms/>}/>
+      </Routes>
+
     </div>
   );
 }
