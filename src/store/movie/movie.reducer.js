@@ -1,4 +1,4 @@
-import {ADD_MOVIE, DELETE_MOVIE, GET_MOVIE} from "./movie.types";
+import {ADD_MOVIE, DELETE_MOVIE, GET_MOVIE, ADD_USER} from "./movie.types";
 
 const initialState = {
     Movie: [],
@@ -27,6 +27,13 @@ export const movieReducer = (state = initialState, action) => {
                 ...state,
                 movie: action.payload
             }
+
+        case ADD_USER:
+                return {
+                    ...state,
+                    UserData: action.payload
+                }
+    
 
         default:
             return state

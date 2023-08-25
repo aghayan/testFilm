@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { Navigation } from '../component/navigation';
 import { AddData } from '../store/movie/movie.action';
-import '../styles/registration.scss';
+import './styles/registration.scss';
 
 export  function RegistrationForm() {
   const dispatch = useDispatch();
@@ -84,8 +84,8 @@ return (
                   {...register("password",{ 
                       required: 'Password is required',
                       minLength: {
-                          value: 8,
-                          message: "Password must be 8-16 characters long"
+                          value: 5,
+                          message: "Password must be 5-16 characters long"
                       },
                       maxLength: {
                           value: 16,

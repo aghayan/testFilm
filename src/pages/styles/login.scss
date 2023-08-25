@@ -1,9 +1,10 @@
 .login-container {
   background-color: black;
-  height: 500px;
+  height: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 150px;
 
   .login-box {
     background-color: rgba(0, 0, 0, 0.8);
@@ -60,6 +61,7 @@
 
         &:hover {
           background-color: #c70000;
+          color: black;
         }
       }
     }

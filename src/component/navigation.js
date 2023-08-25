@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/header.scss";
+import "./components_style/header.scss";
 import { useNavigate } from "react-router-dom";
 
 export function Navigation() {
@@ -20,17 +20,17 @@ export function Navigation() {
               </Link>
             </li>
             <li>
-              <Link to="/about" className="xxx">
+              <Link to="/aboutPage" className="xxx">
                 About
               </Link>
             </li>
             <li>
-              <Link to="/services" className="xxx">
+              <Link to="/servicesPage" className="xxx">
                 Services
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="xxx">
+              <Link to="/contactPage" className="xxx">
                 Contact
               </Link>
             </li>

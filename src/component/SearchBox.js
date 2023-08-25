@@ -3,6 +3,7 @@ import React from 'react';
 const SearchBox = (props) => {
 	return (
 		<div className='col col-sm-4'>
+			<p>Find any of your movies</p>
 			<input
 				className='form-control'
 				value={props.value}

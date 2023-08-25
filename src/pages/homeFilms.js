@@ -5,50 +5,46 @@ import RemoveFavourites from "../component/RemoveFavourites";
 import SearchBox from "../component/SearchBox";
 import AddFavourites from '../component/AddFavourites';
 import { Navigation } from "../component/navigation";
-import "../styles/homeFilms.scss";
+import "./styles/homeFilms.scss";
 import axios from 'axios';
-
-
+import { Loading } from "../component/loading";
 
 
 export function Homefilms() {
+
+    
 
     const [movies, setMovies] = useState([]);
 	const [favourites, setFavourites] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
 
   const getMovieRequest = async (searchValue) => {
-		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=263d22d8`;
+	
 
-		const response = await fetch(url);
-		const responseJson = await response.json();
-
-		if (responseJson.Search) {
-			setMovies(responseJson.Search);
-		}
+        axios.get(`https://api.themoviedb.org/3/search/movie?query=${searchValue}&api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`)
+            .then((res) => {
+            setMovies(res.data.results)
+            })
+            
 	};
 
-    // useEffect(() => {
-    //     axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`)
-    //     .then((res) => {
-    //         setMovies(res)
-    //         console.log(res)
-    //     })},[])
 
     useEffect(() => {
-        axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`, {
-            params: {
-                api_key: 'YOUR_TMDB_API_KEY',
-                language: 'en-US'
-            }
-        })
-        .then((res) => {
-            setMovies(res.data.results);
-        })
-        .catch((error) => {
-            console.error("Error fetching popular movies:", error);
-        });
+        const url = `https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`;
+    
+        axios.get(url)
+            .then((res) => {
+                const movieData = res.data.results;
+                setMovies(movieData); 
+                console.log(res);
+                
+            })
+            .catch((error) => {
+                console.error("Error fetching movie data:", error);
+            });
+            
     }, []);
+    
 
 	useEffect(() => {
 		getMovieRequest(searchValue);
@@ -85,33 +81,36 @@ export function Homefilms() {
     return(
 
         <>
-        
+        <Loading/>
         <div>
         <Navigation/>
-                  <div className='container-fluid movie-app'>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieListHeading heading='Movies' />
-				<SearchBox className="search" searchValue={searchValue} setSearchValue={setSearchValue} />
-			</div>
-			<div className='row'>
-				<MovieList
-					movies={movies}
-					handleFavouritesClick={addFavouriteMovie}
-					favouriteComponent={AddFavourites}
-				/>
-			</div>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieListHeading heading='Favourites' />
-			</div>
-			<div className='row'>
-				<MovieList
-					movies={favourites}
-					handleFavouritesClick={removeFavouriteMovie}
-					favouriteComponent={RemoveFavourites}
-				/>
-			</div>
-		</div>
+            <div className='container-fluid movie-app'>
+                <div className='row d-flex align-items-center mt-4 mb-4'>
+                    <MovieListHeading heading='Movies' />
+                    <SearchBox className="search" searchValue={searchValue} setSearchValue={setSearchValue} />
+                </div>
+                <div className='row'>
+                    <MovieList
+                        movies={movies}
+                        handleFavouritesClick={addFavouriteMovie}
+                        favouriteComponent={AddFavourites}
+                    />
+                </div>
+                <div className='row d-flex align-items-center mt-4 mb-4'>
+                    <MovieListHeading heading='Favourites' />
+                </div>
+                <div className='row'>
+                    <MovieList
+                        movies={favourites}
+                        handleFavouritesClick={removeFavouriteMovie}
+                        favouriteComponent={RemoveFavourites}
+                    />
+                </div>
+            </div>
         </div>
         </>
     )
 }
+
+
+

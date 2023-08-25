@@ -7,16 +7,19 @@
 body {
 	background: #141414;
 	color: #ffffff;
+    font-family: math;
 }
 
 .container-fluid {
     padding-top: 120px;
 }
 .movie-app > .row {
+    // padding-top: 100px;
     overflow-x: clip;
 	flex-wrap: wrap;
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .image-container {
